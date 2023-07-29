@@ -10,16 +10,19 @@ router.route("/")
     try {
       // console.log(req.body, req.files);
       // return res.send(req.files);
-      const { userId, description, tags, mediaType } = req.body;
+      const { userId, description, tags, mediaType, mediaUrl } = req.body;
+      
+      if(!mediaUrl){
+        const postMedia = req.files.postMedia.tempFilePath;
+  
+        const mycloud = await cloudinary.v2.uploader.upload(postMedia);
+  
+        console.log(mycloud);
+        mediaUrl = mycloud.secure_url;
+  
+        fs.rmSync("./tmp", { recursive: true });
+      }
 
-      const postMedia = req.files.postMedia.tempFilePath;
-
-      const mycloud = await cloudinary.v2.uploader.upload(postMedia);
-
-      console.log(mycloud);
-      const mediaUrl = mycloud.secure_url;
-
-      fs.rmSync("./tmp", { recursive: true });
       
       const post = await Post.create({ userId, description, tags, mediaType, mediaUrl })
       if(post){
