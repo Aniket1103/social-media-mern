@@ -53,6 +53,25 @@ router.route("/")
     }
   })
 
+router.route("/:postId")
+.get(async (req, res) => {
+  const { postId } = req.params;
+  
+  try {
+    const post = await Post.findById(postId);
+    
+    if(!post){
+      return res.status(404).json({ error : "post not found."});
+    }
+
+    return res.status(200).json(post);
+    
+  } catch (error) {
+    console.error('Error fetching Post:', error);
+    res.status(500).json({ error: 'Failed to fetch the Post.'});
+  }
+})
+
 router.route("/:postId/like")
   .post(async (req, res) => {
     const { postId } = req.params;
