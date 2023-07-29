@@ -22,7 +22,7 @@ export const register = async (req, res) => {
       email,
       password,
       otp,
-      otp_expiry: new Date(Date.now() + process.env.OTP_EXPIRE * 60 * 1000),
+      // otp_expiry: new Date(Date.now() + process.env.OTP_EXPIRE * 60 * 1000),
     })
 
     return res.send(user);
