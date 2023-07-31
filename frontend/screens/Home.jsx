@@ -19,7 +19,7 @@ import MasonryList from "react-native-masonry-list";
 import axios from "axios";
 import MediaCard from "../components/MediaCard";
 
-const Home = ({ navigation }) => {
+const Home = ({ navigation, route }) => {
   const [posts, setPosts] = useState([]);
   const numColumns = 2;
 

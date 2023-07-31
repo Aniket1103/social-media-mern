@@ -5,8 +5,9 @@ import Icon from "react-native-vector-icons/Octicons";
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
 
-export default function Header() {
+export default function Header({route}) {
   const navigation = useNavigation();
+  console.log(route)
   return (
     <View>
         <ScrollView >
@@ -16,7 +17,7 @@ export default function Header() {
 
               <TouchableOpacity
                 style={styles.Btn}
-                onPress={() => navigation.navigate('camera')}
+                onPress={() => navigation.navigate('camera', {action: "createPost"})}
               >
                 <Icon name="diff-added" size={23} />
               </TouchableOpacity>

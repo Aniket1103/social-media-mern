@@ -3,12 +3,14 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import OptionsIcon from "react-native-vector-icons/Entypo";
 import LikeIcon from "react-native-vector-icons/Octicons";
 import { Avatar } from 'react-native-paper';
+import mime from "mime";
 
 const PhotoCard = ({ post }) => {
   const [ size, setSize ] = useState(1)
   const [ like, setLike ]  = useState(false); //
   const { mediaUrl, likes, description } = post;
   // console.log(post._id)
+  // console.log("type: ", [mime.getType(mediaUrl), mediaUrl])
   
   Image.getSize(
     mediaUrl, (width, height) => {
