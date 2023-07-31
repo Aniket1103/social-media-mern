@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import Home from './screens/Home';
 import PhotoPosts from './screens/PhotoPosts';
+import VideoPosts from './screens/VideoPosts';
 import Camera from './screens/Camera';
 
 export default function Main() {
@@ -15,6 +16,7 @@ export default function Main() {
 
         <Stack.Screen name='home' component={Home} options={{ headerShown: false }} />
         <Stack.Screen name='PhotoPosts' component={PhotoPosts} options={{ headerShown: false }} />
+        <Stack.Screen name='VideoPosts' component={VideoPosts} options={{ headerShown: false }} />
         <Stack.Screen name='camera' component={Camera} options={{ headerShown: false }} />
         {/* <Stack.Screen name='login' component={Login} options={{ headerShown: false }} />
         <Stack.Screen name='register' component={Register} options={{ headerShown: false }} />

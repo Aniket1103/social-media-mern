@@ -30,13 +30,6 @@ const MediaCard = ({ post }) => {
       console.log(error);
     }
   }
-  useEffect(() => {
-    
-  
-    return () => {
-      
-    }
-  }, [])
   
 
   // console.log(baseUrl)
@@ -76,6 +69,7 @@ const styles = StyleSheet.create({
     // border: 1,
     // borderBlockColor: "white",
     margin: 2,
+    // marginTop: (-1)*Math.floor(Math.random()*100),
     position: "relative",
   },
   img: {
@@ -84,7 +78,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     borderRadius: 10,
-    overlayColor: "#eaeaea"
+    overlayColor: "#eaeaea",
     // resizeMode: "cover"
     // resizeMethod: "scale"
   },

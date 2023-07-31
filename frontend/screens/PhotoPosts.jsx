@@ -8,6 +8,7 @@ import Loader from "../components/Loader";
 
 export default function PhotoPosts({route}) {
   const [posts, setPosts] = useState(null);
+  // console.log("post--", route.params.post.mediaUrl)
 
   async function getPosts() {
     try {
