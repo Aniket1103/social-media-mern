@@ -44,7 +44,7 @@ const MediaCard = ({ post }) => {
   
   return (
     <View style={ styles.card }>
-      <TouchableOpacity key={_id} style={{flex : 1}} onPress={ () => handleCardPress(post) }>
+      <TouchableOpacity key={_id} style={{flex : 1, borderRadius: 10, overflow: "hidden"}} onPress={ () => handleCardPress(post) }>
         <Image
           // height={Math.ceil(Math.random()*100)}
           style={styles.img}
