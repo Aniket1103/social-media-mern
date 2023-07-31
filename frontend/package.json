@@ -1,0 +1,33 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "@react-native-seoul/masonry-list": "^1.4.2",
+    "@react-navigation/native": "^6.1.7",
+    "@react-navigation/native-stack": "^6.9.13",
+    "axios": "^1.4.0",
+    "expo": "~49.0.5",
+    "expo-camera": "~13.4.2",
+    "expo-image-picker": "~14.3.2",
+    "expo-status-bar": "~1.6.0",
+    "expo-video-player": "^2.2.0",
+    "mime": "^3.0.0",
+    "react": "18.2.0",
+    "react-native": "0.72.3",
+    "react-native-masonry-list": "^2.16.1",
+    "react-native-paper": "^5.9.1",
+    "react-native-vector-icons": "^10.0.0",
+    "react-native-video": "^5.2.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0"
+  },
+  "private": true
+}
