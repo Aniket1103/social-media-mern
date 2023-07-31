@@ -10,19 +10,16 @@ router.route("/")
     try {
       // console.log(req.body, req.files);
       // return res.send(req.files);
-      const { userId, description, tags, mediaType, mediaUrl } = req.body;
-      
-      if(!mediaUrl){
-        const postMedia = req.files.postMedia.tempFilePath;
-  
-        const mycloud = await cloudinary.v2.uploader.upload(postMedia);
-  
-        console.log(mycloud);
-        mediaUrl = mycloud.secure_url;
-  
-        fs.rmSync("./tmp", { recursive: true });
-      }
+      const { userId, description, tags, mediaType } = req.body;
 
+      const postMedia = req.files.postMedia.tempFilePath;
+
+      const mycloud = await cloudinary.v2.uploader.upload(postMedia);
+
+      console.log(mycloud);
+      const mediaUrl = mycloud.secure_url;
+
+      fs.rmSync("./tmp", { recursive: true });
       
       const post = await Post.create({ userId, description, tags, mediaType, mediaUrl })
       if(post){
@@ -53,22 +50,24 @@ router.route("/")
     }
   })
 
-router.route("/:postId")
+router.route("/photo")
 .get(async (req, res) => {
   const { postId } = req.params;
   
   try {
-    const post = await Post.findById(postId);
+    const photoPosts = await Post.find({mediaType: 'photo'})
+      .populate('userId') // Populating userId
+      .populate('likes') // Populating likes array with users
     
-    if(!post){
-      return res.status(404).json({ error : "post not found."});
+    if(!photoPosts){
+      return res.status(404).json({ error : "photoPosts not found."});
     }
 
-    return res.status(200).json(post);
+    return res.status(200).json(photoPosts);
     
   } catch (error) {
-    console.error('Error fetching Post:', error);
-    res.status(500).json({ error: 'Failed to fetch the Post.'});
+    console.error('Error fetching photoPosts:', error);
+    res.status(500).json({ error: 'Failed to fetch photoPosts.'});
   }
 })
 
