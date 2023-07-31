@@ -18,9 +18,10 @@ import MasonryWall from "../components/MasonryWall";
 import MasonryList from "react-native-masonry-list";
 import axios from "axios";
 import MediaCard from "../components/MediaCard";
+import Loader from "../components/Loader";
 
 const Home = ({ navigation, route }) => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState(null);
   const numColumns = 2;
 
   async function getPosts() {
@@ -49,7 +50,13 @@ const Home = ({ navigation, route }) => {
     <ScreenWrapper>
       <Header />
 
-      <MasonryWall posts={posts} />
+      {
+        !posts ? (
+          <Loader />
+        ) : (
+          <MasonryWall posts={posts} />
+        )
+      }
 
       {/* <FlatList 
           style={{ backgroundColor: "#eaeaea", flex: 1 , paddingHorizontal: 8, paddingTop: 3}}

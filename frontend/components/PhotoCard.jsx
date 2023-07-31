@@ -8,7 +8,7 @@ import mime from "mime";
 const PhotoCard = ({ post }) => {
   const [ size, setSize ] = useState(1)
   const [ like, setLike ]  = useState(false); //
-  const { mediaUrl, likes, description } = post;
+  const { mediaUrl, likes, description, userId } = post;
   // console.log(post._id)
   // console.log("type: ", [mime.getType(mediaUrl), mediaUrl])
   
@@ -32,7 +32,7 @@ const PhotoCard = ({ post }) => {
           <Text
             style={styles.UserName}
           >
-            John Doe
+            {userId.name}
           </Text>
         </View>
         <TouchableOpacity styles={{flex: 1}}>
