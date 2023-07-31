@@ -50,12 +50,12 @@ router.route("/")
     }
   })
 
-router.route("/photo")
+router.route("/:type")
 .get(async (req, res) => {
-  const { postId } = req.params;
+  const { type } = req.params;
   
   try {
-    const photoPosts = await Post.find({mediaType: 'photo'})
+    const photoPosts = await Post.find({mediaType: type})
       .populate('userId') // Populating userId
       .populate('likes') // Populating likes array with users
     
