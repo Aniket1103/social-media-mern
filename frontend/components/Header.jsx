@@ -3,8 +3,10 @@ import { StyleSheet } from 'react-native';
 import Icon from "react-native-vector-icons/Octicons";
 
 import React from 'react'
+import { useNavigation } from '@react-navigation/native';
 
 export default function Header() {
+  const navigation = useNavigation();
   return (
     <View>
         <ScrollView >
@@ -13,13 +15,13 @@ export default function Header() {
               <Text style={styles.heading}>Highon</Text>
 
               <TouchableOpacity
-                style={styles.addBtn}
-                // onPress={}
+                style={styles.Btn}
+                onPress={() => navigation.navigate('camera')}
               >
                 <Icon name="diff-added" size={23} />
               </TouchableOpacity>
               <TouchableOpacity
-                style={styles.addBtn}
+                style={styles.Btn}
                 // onPress={}
               >
                 <Icon name="search" size={23} />
@@ -48,7 +50,7 @@ const styles = StyleSheet.create({
     // paddingVertical: 5,
     backgroundColor: "#fff",
   },
-  addBtn: {
+  Btn: {
     // backgroundColor: "#fff",
     // marginHorizontal: 10,
     paddingHorizontal: 10,
