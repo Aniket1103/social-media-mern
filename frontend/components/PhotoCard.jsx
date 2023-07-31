@@ -60,7 +60,7 @@ const PhotoCard = ({ post }) => {
         (likes.length > 0 )? (
           <>
             <Text style={styles.firstLikerName}>{likes[0].name}</Text>
-            <Text> and {likes.length-Math.min(3, likes.length)} other people liked the post</Text>
+            <Text style={{fontStyle:"italic"}}> and {likes.length-Math.min(3, likes.length)} other people liked the post</Text>
           </>
         ) :
         (
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   },
   UserName: {
     marginLeft: 4,
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: 'bold',
   },
   image: {
@@ -111,13 +111,14 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     borderRadius: 100,
-    marginRight: -13, // to overlap avatars
+    marginRight: -14, // to overlap avatars
     borderWidth: 1, 
     borderColor: '#eee'
   },
   firstLikerName: {
-    marginLeft: 8,
+    marginLeft: 15,
     fontSize: 14,
+    fontStyle: 'italic',
     fontWeight: 'bold',
   },
   likeButton: {

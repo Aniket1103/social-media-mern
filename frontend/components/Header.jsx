@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function Header({route}) {
   const navigation = useNavigation();
-  console.log(route)
+  console.log("route", route)
   return (
     <View>
         <ScrollView >

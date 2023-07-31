@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Loader from "../components/Loader";
 
-export default function PhotoPosts() {
+export default function PhotoPosts({route}) {
   const [posts, setPosts] = useState(null);
 
   async function getPosts() {
