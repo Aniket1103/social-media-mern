@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  ToastAndroid,
 } from "react-native";
 import ScreenWrapper from "../components/ScreenWrapper";
 import Header from "../components/Header";
@@ -14,12 +15,17 @@ import { useNavigation } from "@react-navigation/native";
 import { AntDesign } from "@expo/vector-icons";
 import Icon from "react-native-vector-icons/FontAwesome";
 import LocationIcon from "react-native-vector-icons/MaterialIcons";
+import axios from "axios";
+import FormData from "form-data";
+import mime from "mime";
 
 export default function PostCreator({ route }) {
   const { aspectRatio, uri } = route.params;
   console.log(route);
   const navigation = useNavigation();
-
+  
+  const userId = "64c540a3a0d38ce9eefb9bbf";
+  const postEndpoint = "https://socio-vibe-server.onrender.com/api/v1/posts";
   const [description, setDescription] = useState("");
   const [tag, setTag] = useState("");
   const [tags, setTags] = useState([]);
@@ -37,14 +43,35 @@ export default function PostCreator({ route }) {
     setLocation("");
   };
 
-  const createPost = () => {
+  const createPost = async () => {
     if (tags.length < 1) return alert("Atleast 1 tag is required");
-    const body = {
-      description,
-      tags,
-      location
+    try {
+      const body = {
+        description,
+        tags,
+        location
+      }
+      const mediaType = mime.getType(uri).includes("image/") ? "photo" : "video";
+      const data = new FormData();
+      data.append('userId', userId);
+      data.append('description', description);
+      data.append('location', location);
+      data.append('tags', JSON.stringify(tags));
+      data.append('mediaType', mediaType);
+      data.append('postMedia', uri);
+      const { resData } = await axios.post(`${postEndpoint}/register`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      ToastAndroid.show("Post Created Successfully!", ToastAndroid.SHORT);
+      navigation.navigate('home', {resData});
     }
-    console.log(body);
+    catch(error) {
+      ToastAndroid.show("Error while posting the content.", ToastAndroid.SHORT);
+      console.log(error);
+    }
   };
 
   return (

@@ -13,7 +13,9 @@ export default function Header({route}) {
         <ScrollView >
           <SafeAreaView >
             <View style={styles.header}>
-              <Text style={styles.heading}>Highon</Text>
+              <Text style={styles.heading}>
+                {/* Highon */}
+              </Text>
 
               <TouchableOpacity
                 style={styles.Btn}
