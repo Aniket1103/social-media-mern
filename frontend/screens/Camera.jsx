@@ -12,7 +12,7 @@ export default function CameraComponent({route}) {
 
   const navigation = useNavigation();
 
-  console.log(route)
+  // console.log(route)
 
   useEffect(() => {
     requestPermission()
@@ -41,7 +41,7 @@ export default function CameraComponent({route}) {
     if(data.canceled) {
       return navigation.navigate("camera");
     }
-    return navigation.navigate("home", {image: data?.assets[0]?.uri})
+    return navigation.navigate("ImageEditor", {image: data?.assets[0]?.uri})
     if (route.params.updateProfile) return navigation.navigate("profile", { image: data.uri })
     else return navigation.navigate("register", { image: data.uri })
   }
@@ -49,7 +49,7 @@ export default function CameraComponent({route}) {
     try{
       const data = await camera.takePictureAsync();
       console.log({image: data.uri})
-      return navigation.navigate("home", {image: data.uri})
+      return navigation.navigate("ImageEditor", {image: data.uri})
     }
     catch(error){
       console.log(error);

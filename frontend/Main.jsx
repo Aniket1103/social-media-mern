@@ -5,6 +5,8 @@ import Home from './screens/Home';
 import PhotoPosts from './screens/PhotoPosts';
 import VideoPosts from './screens/VideoPosts';
 import Camera from './screens/Camera';
+import ImageEditor from './screens/ImageEditor';
+import PostCreator from './screens/PostCreator';
 
 export default function Main() {
 
@@ -18,6 +20,8 @@ export default function Main() {
         <Stack.Screen name='PhotoPosts' component={PhotoPosts} options={{ headerShown: false }} />
         <Stack.Screen name='VideoPosts' component={VideoPosts} options={{ headerShown: false }} />
         <Stack.Screen name='camera' component={Camera} options={{ headerShown: false }} />
+        <Stack.Screen name='ImageEditor' component={ImageEditor} options={{ headerShown: false }} />
+        <Stack.Screen name='PostCreator' component={PostCreator} options={{ headerShown: false }} />
         {/* <Stack.Screen name='login' component={Login} options={{ headerShown: false }} />
         <Stack.Screen name='register' component={Register} options={{ headerShown: false }} />
         <Stack.Screen name='verify' component={Verify} options={{ headerShown: false }} />
