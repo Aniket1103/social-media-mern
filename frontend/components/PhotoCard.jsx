@@ -4,6 +4,7 @@ import OptionsIcon from "react-native-vector-icons/Entypo";
 import LikeIcon from "react-native-vector-icons/Octicons";
 import { Avatar } from 'react-native-paper';
 import mime from "mime";
+import Like from './Like';
 
 const PhotoCard = ({ post }) => {
   const [ size, setSize ] = useState(1)
@@ -43,10 +44,7 @@ const PhotoCard = ({ post }) => {
         <Image source={{ uri: mediaUrl }} aspectRatio={size} style={{flex: 1, borderRadius: 10, overlayColor: "#fff"}} />
 
         {/* Like button */}
-        <TouchableOpacity style={styles.likeButton} onPress={() => setLike(!like)}>
-          {/* Your like button icon */}
-          <LikeIcon name={!like ? 'heart' : 'heart-fill'} size={23} color={!like ? "#fff" : "#f44336"}/>
-        </TouchableOpacity>
+        <Like />
       </TouchableOpacity>
 
       {/* Liked user avatars */}
@@ -120,14 +118,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontStyle: 'italic',
     fontWeight: 'bold',
-  },
-  likeButton: {
-    position: 'absolute',
-    bottom: 8,
-    right: 8,
-    backgroundColor: 'transparent',
-    padding: 8,
-  },
+  }
 });
 
 export default PhotoCard;

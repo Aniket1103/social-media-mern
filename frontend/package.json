@@ -18,13 +18,13 @@
     "expo-image-picker": "~14.3.2",
     "expo-status-bar": "~1.6.0",
     "expo-video-player": "^2.2.0",
+    "expo-video-thumbnails": "~7.4.0",
     "mime": "^3.0.0",
     "react": "18.2.0",
     "react-native": "0.72.3",
     "react-native-masonry-list": "^2.16.1",
     "react-native-paper": "^5.9.1",
-    "react-native-vector-icons": "^10.0.0",
-    "react-native-video": "^5.2.1"
+    "react-native-vector-icons": "^10.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
