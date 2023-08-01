@@ -10,7 +10,8 @@ router.route("/")
     try {
       // console.log(req.body, req.files);
       // return res.send(req.files);
-      const { userId, description, tags, mediaType, mediaUrl } = req.body;
+      const { userId, description, tags, mediaType, location } = req.body;
+      let { mediaUrl } = req.body;
 
       if(!mediaUrl){
         const postMedia = req.files.postMedia.tempFilePath;
@@ -23,7 +24,7 @@ router.route("/")
         fs.rmSync("./tmp", { recursive: true });
       }
       
-      const post = await Post.create({ userId, description, tags, mediaType, mediaUrl })
+      const post = await Post.create({ userId, description, tags, mediaType, mediaUrl, location })
       if(post){
         res.json(post);
       }
