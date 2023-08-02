@@ -40,6 +40,15 @@ export const register = async (req, res) => {
   }
 }
 
+export const currentUser = async (req, res) => {
+  try {
+    // console.log("req.user", req.user);
+    return res.json(req.user);
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
