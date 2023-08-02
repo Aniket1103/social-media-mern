@@ -64,14 +64,14 @@ export default function PostCreator({ route }) {
         name: uri.split("/").pop()
       });
       
-      const { resData } = await axios.post(`${postEndpoint}`, data, {
+      const response = await axios.post(`${postEndpoint}`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(resData);
+      console.log(response.data);
       ToastAndroid.show("Post Created Successfully!", ToastAndroid.SHORT);
-      navigation.navigate('home', {resData});
+      navigation.navigate('home', {newPost : response.data});
     }
     catch(error) {
       ToastAndroid.show("Error while posting the content.", ToastAndroid.SHORT);

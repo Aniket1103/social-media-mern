@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native'
+import { View, Text, ScrollView, SafeAreaView, TouchableOpacity, Image } from 'react-native'
 import { StyleSheet } from 'react-native';
 import Icon from "react-native-vector-icons/Octicons";
 
@@ -13,9 +13,12 @@ export default function Header({route}) {
         <ScrollView >
           <SafeAreaView >
             <View style={styles.header}>
-              <Text style={styles.heading}>
-                {/* Highon */}
-              </Text>
+              {/* <Text style={styles.heading}>
+                Highon
+              </Text> */}
+              <View style={{flex: 1, width: 200, height: 40}}>
+                <Image style={styles.icon} source={{uri : "https://ci3.googleusercontent.com/mail-sig/AIorK4yLVkJ-qzIPwBPdxNKbBdHHs6kRs0zsyRnuS3k8UUz7S21YxkmOXdzCxwJ0n_4cYTBWJ7OpMD0"}} />
+              </View>
 
               <TouchableOpacity
                 style={styles.Btn}
@@ -37,6 +40,14 @@ export default function Header({route}) {
 }
 
 const styles = StyleSheet.create({
+  icon : {
+    width: 81,
+    height: 39,
+    marginLeft: 21
+    // resizeMode: "cover"
+    // zIndex:2
+
+  },
   heading: {
     width: "75%",
     fontSize: 28,
@@ -50,6 +61,7 @@ const styles = StyleSheet.create({
   header: {
     flex: 1,
     flexDirection: "row",
+    alignItems: "center",
     // paddingVertical: 5,
     backgroundColor: "#fff",
   },
