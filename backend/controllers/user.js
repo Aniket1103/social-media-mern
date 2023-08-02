@@ -1,4 +1,5 @@
 import { User } from "../models/Users.js";
+import { sendToken } from "../utils/sentToken.js";
 
 export const register = async (req, res) => {
   try{
@@ -25,9 +26,13 @@ export const register = async (req, res) => {
       // otp_expiry: new Date(Date.now() + process.env.OTP_EXPIRE * 60 * 1000),
     })
 
-    return res.send(user);
+    sendToken(
+      res,
+      user,
+      201,
+      "OTP sent to your email, please verify your account"
+    );
 
-    
   }
   catch(error) {
     console.log(error);
@@ -63,9 +68,7 @@ export const login = async (req, res) => {
         .json({ success: false, message: "Invalid Email or Password" });
     }
 
-    res
-    .status(200)
-    .json({ success: true, message : "Login Successfull!", user });
+    sendToken(res, user, 200, "Login Successful");
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -75,6 +78,9 @@ export const logout = async (req, res) => {
   try {
     res
       .status(200)
+      .cookie("token", null, {
+        expires: new Date(Date.now()),
+      })
       .json({ success: true, message: "Logged out successfully" });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });

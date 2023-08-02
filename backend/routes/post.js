@@ -2,8 +2,11 @@ import express from "express";
 import { Post } from "../models/Posts.js";
 import cloudinary from "cloudinary";
 import fs from "fs";
+import { isAuthenticated } from "../middleware/auth.js";
 
 const router = express.Router();
+
+router.use(isAuthenticated);
 
 router.route("/")
   .post(async (req, res) => {
