@@ -23,6 +23,7 @@ import Loader from "../components/Loader";
 const Home = ({ navigation, route }) => {
   const [posts, setPosts] = useState(null);
   const numColumns = 2;
+  console.log("homeScreen route: ", route);
 
   async function getPosts() {
     try {
@@ -30,7 +31,7 @@ const Home = ({ navigation, route }) => {
         "https://socio-vibe-server.onrender.com/api/v1/posts"
       );
       // console.log(postsDetails.data.posts);
-      setPosts(postsDetails.data.posts);
+      setPosts(postsDetails.data.posts.reverse());
       console.log(posts.length);
     } catch (error) {
       console.log(error);
@@ -41,6 +42,10 @@ const Home = ({ navigation, route }) => {
     getPosts();
   }, []);
 
+  useEffect(() => {
+    if(route?.params?.newPost) setPosts(currentPosts => [route.params.newPost, ...(currentPosts.reverse())].reverse());
+  }, [route?.params]);
+
   const renderPost = ({ item }) => {
     // console.log(item)
     return <MediaCard style={styles.card} post={item} />;
@@ -50,13 +55,7 @@ const Home = ({ navigation, route }) => {
     <ScreenWrapper>
       <Header />
 
-      {
-        !posts ? (
-          <Loader />
-        ) : (
-          <MasonryWall posts={posts} />
-        )
-      }
+      {!posts ? <Loader /> : <MasonryWall posts={posts} />}
 
       {/* <FlatList 
           style={{ backgroundColor: "#eaeaea", flex: 1 , paddingHorizontal: 8, paddingTop: 3}}
