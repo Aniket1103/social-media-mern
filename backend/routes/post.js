@@ -13,17 +13,19 @@ router.route("/")
     try {
       // console.log(req.body, req.files);
       // return res.send(req.files);
-      const { userId, description, tags, mediaType, location } = req.body;
+      // console.log("req.user", req.user._id.toString());
+      const { description, tags, mediaType, location } = req.body;
+      const userId = req.user._id.toString();
       let { mediaUrl } = req.body;
-
+      
       if(!mediaUrl){
         const postMedia = req.files.postMedia.tempFilePath;
-
+        
         const mycloud = await cloudinary.v2.uploader.upload(postMedia);
-
+        
         console.log(mycloud);
         mediaUrl = mycloud.secure_url;
-
+        
         fs.rmSync("./tmp", { recursive: true });
       }
       
@@ -80,7 +82,7 @@ router.route("/:type")
 router.route("/:postId/like")
   .post(async (req, res) => {
     const { postId } = req.params;
-    const { userId } = req.body;
+    const userId = req.user._id.toString();
 
     try {
       // Find the post by its ID
