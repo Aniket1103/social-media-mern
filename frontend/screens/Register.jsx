@@ -1,26 +1,74 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
 
 export default function RegisterScreen() {
   const navigation = useNavigation();
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  // const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleRegister = () => {
-    
-    navigation.navigate('home');
+  const handleRegister = async () => {
+    if(!name || !email || !password) return alert("Name, Email or Password cannot be empty.");
+    console.log(email, password)
+
+    try {
+      const {data} = await axios.post("https://socio-vibe-server.onrender.com/api/v1/register", {
+        name,
+        email,
+        password
+      });
+      
+      // console.log(data);
+      navigation.navigate('home');
+    } catch (error) {
+      const { status } = error.response;
+      console.log(status);
+      if(status === 400 || status.status === 401) ToastAndroid.show("Invalid email or password,\nPlease verify once.", ToastAndroid.SHORT);
+      else ToastAndroid.show("Error Logging in\nPlease try again.", ToastAndroid.SHORT);
+    }
+  };
+
+  const handleLogin = async () => {
+    if(!email || !password) return alert("Email or Password cannot be empty.0");
+    console.log(email, password)
+
+    try {
+      const {data} = await axios.post("https://socio-vibe-server.onrender.com/api/v1/login", {
+          email,
+          password
+      });
+      
+      // console.log(data);
+      navigation.navigate('home');
+    } catch (error) {
+      const { status } = error.response;
+      console.log(status);
+      if(status === 400 || status.status === 401) ToastAndroid.show("Invalid email or password,\nPlease verify once.", ToastAndroid.SHORT);
+      else ToastAndroid.show("Error Logging in\nPlease try again.", ToastAndroid.SHORT);
+    }
   };
 
   const handleContinueAsGuest = () => {
-    setEmail("")
+    setEmail("guest@gmail.com");
+    setPassword("guest123123");
+    handleLogin();
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Create an Account</Text>
       <View style={styles.form}>
+      <TextInput
+          style={styles.input}
+          placeholder="Name"
+          value={name}
+          onChangeText={setName}
+          autoCapitalize="words"
+          autoCorrect={false}
+        />
         <TextInput
           style={styles.input}
           placeholder="Email"
@@ -38,13 +86,13 @@ export default function RegisterScreen() {
           onChangeText={setPassword}
           secureTextEntry
         />
-        <TextInput
+        {/* <TextInput
           style={styles.input}
           placeholder="Confirm Password"
           value={confirmPassword}
           onChangeText={setConfirmPassword}
           secureTextEntry
-        />
+        /> */}
         <TouchableOpacity style={styles.registerButton} onPress={handleRegister}>
           <Text style={styles.registerButtonText}>Register</Text>
         </TouchableOpacity>

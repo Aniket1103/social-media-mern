@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ToastAndroid } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
 
 export default function LoginScreen() {
   const navigation = useNavigation();
@@ -8,25 +9,29 @@ export default function LoginScreen() {
   const [password, setPassword] = useState('');
 
   const handleLogin = async () => {
-    if(!email || !password) alert("Email or Password cannot be empty");
+    if(!email || !password) return alert("Email or Password cannot be empty.0");
     console.log(email, password)
 
     try {
-      const postsDetails = await axios.get(
-        "https://socio-vibe-server.onrender.com/api/v1/login"
-      );
-      // console.log(postsDetails.data.posts);
-      setPosts(postsDetails.data.posts.reverse());
-      console.log(posts.length);
+      const {data} = await axios.post("https://socio-vibe-server.onrender.com/api/v1/login", {
+          email,
+          password
+      });
+      
+      // console.log(data);
+      navigation.navigate('home');
     } catch (error) {
-      console.log(error);
+      const { status } = error.response;
+      console.log(status);
+      if(status === 400 || status.status === 401) ToastAndroid.show("Invalid email or password,\nPlease verify once.", ToastAndroid.SHORT);
+      else ToastAndroid.show("Error Logging in\nPlease try again.", ToastAndroid.SHORT);
     }
-    // navigation.navigate('home');
   };
 
   const handleContinueAsGuest = () => {
     setEmail("guest@gmail.com");
     setPassword("guest123123");
+    handleLogin();
   };
 
   return (
