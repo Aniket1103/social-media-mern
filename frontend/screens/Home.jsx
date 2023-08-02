@@ -50,13 +50,7 @@ const Home = ({ navigation, route }) => {
     <ScreenWrapper>
       <Header />
 
-      {
-        !posts ? (
-          <Loader />
-        ) : (
-          <MasonryWall posts={posts} />
-        )
-      }
+      {!posts ? <Loader /> : <MasonryWall posts={posts} />}
 
       {/* <FlatList 
           style={{ backgroundColor: "#eaeaea", flex: 1 , paddingHorizontal: 8, paddingTop: 3}}

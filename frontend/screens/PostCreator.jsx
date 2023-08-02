@@ -58,13 +58,18 @@ export default function PostCreator({ route }) {
       data.append('location', location);
       data.append('tags', JSON.stringify(tags));
       data.append('mediaType', mediaType);
-      data.append('postMedia', uri);
-      const { resData } = await axios.post(`${postEndpoint}/register`, data, {
+      data.append('postMedia', {
+        uri: uri,
+        type: mime.getType(uri),
+        name: uri.split("/").pop()
+      });
+      
+      const { resData } = await axios.post(`${postEndpoint}`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-
+      console.log(resData);
       ToastAndroid.show("Post Created Successfully!", ToastAndroid.SHORT);
       navigation.navigate('home', {resData});
     }
