@@ -7,6 +7,8 @@ import VideoPosts from './screens/VideoPosts';
 import Camera from './screens/Camera';
 import ImageEditor from './screens/ImageEditor';
 import PostCreator from './screens/PostCreator';
+import LoginScreen from './screens/Login';
+import RegisterScreen from './screens/Register';
 
 export default function Main() {
 
@@ -14,8 +16,10 @@ export default function Main() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={"home"} >
+      <Stack.Navigator initialRouteName={"login"} >
 
+        <Stack.Screen name='login' component={LoginScreen} options={{ headerShown: false }} />
+        <Stack.Screen name='register' component={RegisterScreen} options={{ headerShown: false }} />
         <Stack.Screen name='home' component={Home} options={{ headerShown: false }} />
         <Stack.Screen name='PhotoPosts' component={PhotoPosts} options={{ headerShown: false }} />
         <Stack.Screen name='VideoPosts' component={VideoPosts} options={{ headerShown: false }} />
