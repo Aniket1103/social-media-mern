@@ -9,7 +9,7 @@ import Like from './Like';
 const PhotoCard = ({ post }) => {
   const [ size, setSize ] = useState(1)
   const [ like, setLike ]  = useState(false); //
-  const { mediaUrl, likes, description, userId } = post;
+  const { mediaUrl, likes, description, userId, location } = post;
   // console.log(post._id)
   // console.log("type: ", [mime.getType(mediaUrl), mediaUrl])
   
@@ -24,7 +24,7 @@ const PhotoCard = ({ post }) => {
   return (
     <View style={styles.card}>
       <View style={{flexDirection: "row"}}>
-        <View style={{display: "flex", flex: 1, flexDirection:"row", margin:6}}>
+        {/* <View style={{display: "flex", flex: 1, flexDirection:"row", margin:6}}>
           <Avatar.Image 
             style={{margin: 1, border: 2, borderColor: 'red'}}
             size={30}
@@ -35,6 +35,22 @@ const PhotoCard = ({ post }) => {
           >
             {userId.name}
           </Text>
+        </View> */}
+        <View style={{display: "flex", flex: 1, flexDirection:"row", margin:6}}>
+          <Image source={{ uri: "https://hackernoon.imgix.net/images/bfqrt3x6hAVgXkezEqVTPC5AAFA2-t4o3l9h.jpeg" }} style={styles.avatar} />
+          <View>
+            <Text
+                style={styles.UserName}
+              >
+              {userId.name || ""}
+            </Text>
+            <Text
+                style={{color: "#202020", fontSize: 11, margin: 4, marginTop: -3}}
+              >
+              {location || ""}
+            </Text>
+          </View>
+
         </View>
         <TouchableOpacity styles={{flex: 1}}>
           <OptionsIcon name='dots-three-horizontal' size={23} marginTop={9} marginHorizontal={10}/>
@@ -51,7 +67,7 @@ const PhotoCard = ({ post }) => {
       <View style={styles.avatarContainer}>
 
         {likes.slice(0, 3).map((liker, index) => (
-          <Image key={index} source={{ uri: "https://www.storypick.com/wp-content/uploads/2022/12/16.jpeg" }} style={styles.avatar} />
+          <Image key={index} source={{ uri: "https://www.storypick.com/wp-content/uploads/2022/12/16.jpeg" }} style={styles.likerAvatar} />
         ))}
         
         {
@@ -106,6 +122,13 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   avatar: {
+    width: 34,
+    height: 34,
+    borderRadius: 100,
+    borderWidth: 1, 
+    borderColor: '#eee'
+  },
+  likerAvatar: {
     width: 24,
     height: 24,
     borderRadius: 100,

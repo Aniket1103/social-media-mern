@@ -19,7 +19,7 @@ export default function PhotoPosts({route}) {
       // setPosts((currPosts) => [...currPosts, postsDetails.data])
       // console.log(postsDetails.data.posts);
       // await (() => new Promise(resolve => setTimeout(resolve, 5000)))()
-      setPosts(postsDetails.data);
+      setPosts(postsDetails.data.reverse());
       // console.log(posts.length);
     } catch (error) {
       console.log(error);
