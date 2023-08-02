@@ -9,7 +9,7 @@ export default function LoginScreen() {
   const [password, setPassword] = useState('');
 
   const handleLogin = async () => {
-    if(!email || !password) return alert("Email or Password cannot be empty.0");
+    if(!email || !password) return alert("Email or Password cannot be empty\nPlease Try Again.");
     console.log(email, password)
 
     try {
