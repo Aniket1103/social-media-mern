@@ -15,7 +15,6 @@ import ScreenWrapper from "../components/ScreenWrapper";
 import Header from "../components/Header";
 import Icon from "react-native-vector-icons/Octicons";
 import MasonryWall from "../components/MasonryWall";
-import MasonryList from "react-native-masonry-list";
 import axios from "axios";
 import MediaCard from "../components/MediaCard";
 import Loader from "../components/Loader";
@@ -43,7 +42,7 @@ const Home = ({ navigation, route }) => {
   }, []);
 
   useEffect(() => {
-    if(route?.params?.newPost) setPosts(currentPosts => [route.params.newPost, ...(currentPosts.reverse())].reverse());
+    if(route?.params?.newPost) setPosts(currentPosts => [route.params.newPost, ...currentPosts]);
   }, [route?.params]);
 
   const renderPost = ({ item }) => {

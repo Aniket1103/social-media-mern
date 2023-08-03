@@ -21,7 +21,12 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.bagayatkar.socialMediaApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -33,6 +38,11 @@
           "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "a83a4ed5-cf44-47bf-8549-c6b99a349c7e"
+      }
+    }
   }
 }
